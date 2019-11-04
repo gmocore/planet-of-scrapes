@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const Scraper = require('../models/Scraper')
 const cheerio = require('cheerio');
 const axios = require('axios');
 
@@ -52,18 +51,37 @@ router.get('/', (req, res) => {
 });
 
 router.get('/scrape', (req, res) => {
-  axios.get('https://www.polygon.com/news').then(response => {
+  axios.get('https://www.freecodecamp.org/news').then(response => {
     const $ = cheerio.load(response.data);
-    // console.log($('.c-entry-box--compact__title').children('a').attr('href'))
     
-    $('.c-entry-box--compact__title').each((i, element) => {
+    $('.post-card-title').each((i, element) => {
 
       let result = {};
 
-      result.title = $(this).children('a').text();
-      result.link = $(this).children('a').attr('href');
+      result.title = $(element)
+      .children()
+      .text()
+      .trim();
 
-      console.log(element.children[0]);
+      result.link = $(element)
+        .children()
+        .attr("href");
+
+      result.tags = $(element)
+      .siblings('.post-card-tags')
+      .children('a')
+      .text()
+      .trim();
+
+      result.author = $(element)
+      .parent('.post-card-header')
+      .parent('.post-card-content-link')
+      .siblings('.post-card-meta')
+      .children('a')
+      .text()
+      .trim();
+
+      console.log(result);
     }) 
       
     res.sendStatus(200);

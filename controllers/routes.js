@@ -10,17 +10,10 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
-// const MongoClient = require("mongodb").MongoClient;
-// const uri =
-//   "mongodb+srv://gerritt:gerritt@planet-of-scrapes-wmmte.mongodb.net/test?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-// const assert = require('assert');
 
 router.get("/", (req, res) => {
     db.Article.find((err, article) => {
         if(err) throw err;
-        
-        console.log(article); 
         
         res.render("index", {article: article});
     })
@@ -78,8 +71,42 @@ router.get("/scrape", (req, res) => {
     });
 });
 
-router.post("/scrape", (req, res) => {
-  res.send("we have success");
+
+// Route for grabbing a specific Article by id, populate it with it's note
+router.get("/articles/:id", (req, res) => {
+    // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+    db.Article.findOne({ _id: req.params.id })
+      // ..and populate all of the notes associated with it
+      .populate("note")
+      .then((dbArticle) => {
+        // If we were able to successfully find an Article with the given id, send it back to the client
+      
+
+        res.json(dbArticle);
+      })
+      .catch((err) => {
+        // If an error occurred, send it to the client
+        res.json(err);
+      });
+  });
+
+router.post("/articles/:id", (req, res) => {
+  // Create a new note and pass the req.body to the entry
+  db.Note.create(req.body)
+    .then((dbNote) => {
+      return db.Article.findByIdAndUpdate({ _id: req.params.id }, { note: dbNote._id });
+    })
+    .then((dbArticle) => {
+      // If we were able to successfully update an Article, send it back to the client
+      
+      res.json(dbArticle);
+    })
+    .catch((err) => {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
+
+  
 
 module.exports = router;

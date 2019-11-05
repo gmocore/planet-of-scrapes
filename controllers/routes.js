@@ -17,7 +17,13 @@ mongoose.connect(
 // const assert = require('assert');
 
 router.get("/", (req, res) => {
-  res.render("index");
+    db.Article.find((err, article) => {
+        if(err) throw err;
+        
+        console.log(article); 
+        
+        res.render("index", {article: article});
+    })
 });
 
 router.get("/scrape", (req, res) => {
@@ -55,11 +61,9 @@ router.get("/scrape", (req, res) => {
         // console.log(result);
         db.Article.create(result)
           .then(article => {
-            let hbObject = {
-              article: article
-            };
+           
             // console.log(hbObject);
-            res.render('index', hbObject)
+           
           })
           .catch(err => {
             console.log(err);

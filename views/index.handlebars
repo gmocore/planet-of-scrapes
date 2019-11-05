@@ -2,9 +2,11 @@
 <button id="scrape" class="btn btn-secondary">Scrape</button>
 
 {{#each article}}
-<h1>{{article.title}}</h1>
+<div class="container border">
+    <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank">{{this.title}}</a>
+    <h2>by: {{this.author}}</h2>
+    <h4>{{this.tags}}</h4>
+</div>
 {{/each }}
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-

@@ -10,7 +10,7 @@ $('#scrape').click(e => {
 
     })
     .then(data => {
-        console.log(data)
+        console.log(data);
     })
     .catch(err => {
         console.log(err);

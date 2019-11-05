@@ -37,6 +37,8 @@ $('.comment').click(e => {
 $('.save').click(e => {
     e.preventDefault();
 
+    console.log(e.target.id)
+
 
     $.ajax({
         url: `/articles/${e.target.id}`,
@@ -49,6 +51,23 @@ $('.save').click(e => {
     })
     .then(data => {
         console.log(data);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+});
+
+$('.delete').click(e => {
+    e.preventDefault();
+
+    $.ajax({
+        url: `/articles/${e.target.id}`,
+        method: 'DELETE'
+
+    })
+    .then(data => {
+        console.log(data);
+        location.reload()
     })
     .catch(err => {
         console.log(err);

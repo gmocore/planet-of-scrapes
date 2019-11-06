@@ -114,7 +114,7 @@ router.delete('/articles/:id', (req, res) => {
   db.Article.findByIdAndRemove({_id: req.params.id})
   .then(removed => res.json(removed))
   .catch(err => res.json(err))
-})
+});
 
 router.get('/saved', (req, res) => {
     db.Article.find({saved: true }, (err, saved) => {

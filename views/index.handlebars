@@ -6,11 +6,11 @@
     <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead">{{this.title}}</a>
     <h5 class="text-muted">by: {{this.author}}</h5>
     <p>{{this.tags}}</p>
-    <button class="btn btn-secondary comment" id="{{this._id}}" data-id="{{this._id}}" data-target="#exampleModal" data-toggle="modal">Comment</button>
+    <button class="btn btn-secondary comment" id="{{this._id}}" data-id="{{this._id}}" data-target="#{{this._id}}" data-toggle="modal">Comment</button>
     <button class="btn btn-danger delete" id="{{this._id}}">Delete</button>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

@@ -116,4 +116,13 @@ router.delete('/articles/:id', (req, res) => {
   .catch(err => res.json(err))
 })
 
+router.get('/saved', (req, res) => {
+    db.Article.find({saved: true }, (err, saved) => {
+        if (err) throw err;
+
+        res.render('saved', { saved: saved })
+    })
+   
+});
+
 module.exports = router;

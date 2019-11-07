@@ -7,16 +7,34 @@ saved
     <h5 class="text-muted">by: {{this.author}}</h5>
     <p>{{this.tags}}</p>
     <div class="input-group mb-3 container">
-        <input type="text" class="form-control comment-input" placeholder="leave a comment" aria-label="comment"
-            aria-describedby="button-addon2" data-input="{{this._id}}">
+        <input type="text" class="form-control comment-input" placeholder="leave a comment"  id="input-{{this._id}}">
         <div class="input-group-append">
             <button class="btn btn-outline-secondary comment" type="button" id="{{this._id}}">Add Comment</button>
         </div>
     </div>
-    {{!-- <button class="btn btn-secondary comment" id="{{this._id}}" data-id="{{this._id}}" data-target="#{{this._id}}"
-        data-toggle="modal">Comment</button> --}}
+    
     <button class="btn btn-danger delete" id="{{this._id}}">Delete</button>
-    <p>{{this.comment}}</p>
+    <a class="btn btn-primary view-comment" id="{{this._id}}">see comment</a>
+    
 </div>
-
 {{/each}}
+
+<div class="modal" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="modal-text">Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

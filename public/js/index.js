@@ -20,12 +20,11 @@ $('#scrape').click(e => {
 $('.comment').click(e => {
     e.preventDefault();
 
-
     $.ajax({
         url: `/saved/${e.target.id}`,
         method: 'POST',
         data: {
-            comment: $('.comment-input').val().trim()
+            comment: $(`#input-${e.target.id}`).val().trim()
         }
     })
     .then(data => {
@@ -36,6 +35,17 @@ $('.comment').click(e => {
     })
 });
 
+$('.view-comment').click(e => {
+ 
+    $.get(`/saved/${e.target.id}`, data => {
+        console.log(data.note.comment)
+        $('#modal').modal({
+            show: true
+        });
+        $('#modal-text').text(data.note.comment)
+    })
+    
+});
 
 
 $('.delete').click(e => {

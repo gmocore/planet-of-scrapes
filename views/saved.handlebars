@@ -1,12 +1,22 @@
 saved
-{{#each article}}
-{{#if saved}}
+<a class="btn btn-secondary" href="/">Home</a>
+{{#each saved}}
+
 <div class="container border mb-2 p-2">
     <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead">{{this.title}}</a>
     <h5 class="text-muted">by: {{this.author}}</h5>
     <p>{{this.tags}}</p>
-    <button class="btn btn-secondary comment" id="{{this._id}}" data-id="{{this._id}}" data-target="#{{this._id}}" data-toggle="modal">Comment</button>
+    <div class="input-group mb-3 container">
+        <input type="text" class="form-control comment-input" placeholder="leave a comment" aria-label="comment"
+            aria-describedby="button-addon2" data-input="{{this._id}}">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary comment" type="button" id="{{this._id}}">Add Comment</button>
+        </div>
+    </div>
+    {{!-- <button class="btn btn-secondary comment" id="{{this._id}}" data-id="{{this._id}}" data-target="#{{this._id}}"
+        data-toggle="modal">Comment</button> --}}
     <button class="btn btn-danger delete" id="{{this._id}}">Delete</button>
+    <p>{{this.comment}}</p>
 </div>
-{{/if }}
+
 {{/each}}

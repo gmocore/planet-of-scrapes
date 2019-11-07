@@ -6,7 +6,7 @@ $('#scrape').click(e => {
 
     $.ajax({
         url: '/scrape',
-        method: 'POST',
+        method: 'GET',
 
     })
     .then(data => {
@@ -22,32 +22,11 @@ $('.comment').click(e => {
 
 
     $.ajax({
-        url: `/articles/${e.target.id}`,
-        method: 'GET',
-
-    })
-    .then(data => {
-        console.log(data);
-    })
-    .catch(err => {
-        console.log(err);
-    })
-});
-
-$('.save').click(e => {
-    e.preventDefault();
-
-    console.log(e.target.id)
-
-
-    $.ajax({
-        url: `/articles/${e.target.id}`,
+        url: `/saved/${e.target.id}`,
         method: 'POST',
         data: {
-            title: $('.article-message-title').val().trim(),
-            body: $('.article-message-body').val().trim()
+            comment: $('.comment-input').val().trim()
         }
-
     })
     .then(data => {
         console.log(data);
@@ -56,6 +35,8 @@ $('.save').click(e => {
         console.log(err);
     })
 });
+
+
 
 $('.delete').click(e => {
     e.preventDefault();
@@ -63,6 +44,23 @@ $('.delete').click(e => {
     $.ajax({
         url: `/articles/${e.target.id}`,
         method: 'DELETE'
+
+    })
+    .then(data => {
+        console.log(data);
+        location.reload()
+    })
+    .catch(err => {
+        console.log(err);
+    })
+});
+
+$('.save-article').click(e => {
+    e.preventDefault();
+
+    $.ajax({
+        url: `/articles/${e.target.id}`,
+        method: 'POST'
 
     })
     .then(data => {

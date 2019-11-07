@@ -81,7 +81,6 @@ router.get("/articles/:id", (req, res) => {
       .then((dbArticle) => {
         // If we were able to successfully find an Article with the given id, send it back to the client
       
-
         res.json(dbArticle);
       })
       .catch((err) => {
@@ -90,17 +89,16 @@ router.get("/articles/:id", (req, res) => {
       });
   });
 
-router.post("/articles/:id", (req, res) => {
+router.post("/saved/:id", (req, res) => {
   // Create a new note and pass the req.body to the entry
-  let notes = [];
 
   db.Note.create(req.body)
     .then((dbNote) => {
-      return db.Article.findByIdAndUpdate({ _id: req.params.id }, { note: dbNote._id });
+      console.log(dbNote)
+      return db.Article.findByIdAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
     })
     .then((dbArticle) => {
       // If we were able to successfully update an Article, send it back to the client
-      notes.push(dbArticle)
       res.json(dbArticle);
     })
     .catch((err) => {
@@ -123,6 +121,12 @@ router.get('/saved', (req, res) => {
         res.render('saved', { saved: saved })
     })
    
+});
+
+router.post('/articles/:id', (req, res) => {
+  db.Article.findByIdAndUpdate({_id: req.params.id}, {$set: { saved: true }})
+  .then(saved => res.json(saved))
+  .catch(err => res.json(err))
 });
 
 module.exports = router;

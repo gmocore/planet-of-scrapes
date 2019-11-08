@@ -11,6 +11,8 @@ $('#scrape').click(e => {
     })
     .then(data => {
         console.log(data);
+        location.reload();
+
     })
     .catch(err => {
         console.log(err);
@@ -29,6 +31,7 @@ $('.comment').click(e => {
     })
     .then(data => {
         console.log(data);
+        $(`#input-${e.target.id}`).val('')
     })
     .catch(err => {
         console.log(err);
@@ -81,3 +84,10 @@ $('.save-article').click(e => {
         console.log(err);
     })
 });
+
+$('#clear').click(e => {
+    $.post('/clear', articles => {
+        console.log(articles)
+        location.reload();
+    })
+})

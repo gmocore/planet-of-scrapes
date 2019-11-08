@@ -1,8 +1,12 @@
 saved
-<a class="btn btn-secondary" href="/">Home</a>
+<div class="container button-container d-flex justify-content-center">
+<a class="btn btn-secondary button-container justify-content-center mb-4" href="/">Home</a>
+
+</div>
+
 {{#each saved}}
 
-<div class="container border mb-2 p-2">
+<div class="container border mb-2 p-2 bg-light" >
     <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead">{{this.title}}</a>
     <h5 class="text-muted">by: {{this.author}}</h5>
     <p>{{this.tags}}</p>

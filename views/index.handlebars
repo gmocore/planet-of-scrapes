@@ -1,16 +1,20 @@
-<h1>Planet of the Scrapes</h1>
-<button id="scrape" class="btn btn-secondary">Scrape</button>
-<a class="btn btn-secondary" href="/saved">Saved Articles</a>
+<div class="container button-container d-flex justify-content-center">
+
+  <button id="scrape" class="btn btn-secondary m-2">Scrape</button>
+  <a class="btn btn-secondary m-2" href="/saved">Saved Articles</a>
+  <button id="clear" class="btn btn-secondary m-2">Clear All</button>
+</div>
+
 
 {{#each article}}
 {{#unless this.saved}}
-<div class="container border mb-2 p-2">
-    <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead">{{this.title}}</a>
-    <h5 class="text-muted">by: {{this.author}}</h5>
-    <p>{{this.tags}}</p>
-    <button class="btn btn-danger delete" id="{{this._id}}">Delete</button>
-    <button class="btn btn-success save-article" id="{{this._id}}">Save</button>
-    
+<div class="container border mb-2 p-2 bg-light">
+  <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead">{{this.title}}</a>
+  <h5 class="text-muted">by: {{this.author}}</h5>
+  <p>{{this.tags}}</p>
+  <button class="btn btn-danger delete" id="{{this._id}}">Delete</button>
+  <button class="btn btn-success save-article" id="{{this._id}}">Save</button>
+
 </div>
 {{/unless}}
 {{/each }}

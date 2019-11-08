@@ -10,6 +10,10 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
+router.get('/assets/css/style.css', (req, res) => {
+  res.sendFile(__dirname, 'assets/css/style.css')
+})
+
 
 router.get("/", (req, res) => {
     db.Article.find((err, article) => {
@@ -64,6 +68,8 @@ router.get("/scrape", (req, res) => {
       });
 
       // res.render(article);
+      res.redirect('/');
+      
     })
     .catch(err => {
       console.log(err);
@@ -119,5 +125,11 @@ router.post('/articles/:id', (req, res) => {
   .then(saved => res.json(saved))
   .catch(err => res.json(err))
 });
+
+router.post('/clear', (req, res) => {
+  db.Article.deleteMany({})
+  .then(removed => res.json(removed))
+  .catch(err => res.json(err))
+})
 
 module.exports = router;

@@ -55,20 +55,24 @@ router.get("/scrape", (req, res) => {
           .text()
           .trim();
 
-        // console.log(result);
-        db.Article.create(result)
-          .then(article => {
-           
-            // console.log(hbObject);
-           
+          db.Article.findOne({ title: result.title })
+          .then(existingArticle => {
+            if(!existingArticle) {
+              db.Article.create(result)
+              .then(article => {
+                console.log(article)
+              })
+              .catch(err => {
+                console.log(err);
+              });
+            } else {
+              res.send('no new articles')
+            }
           })
-          .catch(err => {
-            console.log(err);
-          });
+          .catch(err => res.json(err))
       });
 
-      // res.render(article);
-      res.redirect('/');
+      res.send('All scraped up');
       
     })
     .catch(err => {

@@ -1,13 +1,17 @@
-saved
+
+    <div class="container-fluid bg-dark text-light p-3 mb-2 shadow">
+
+    <h1 class="lead text-center">Saved Articles</h1>
+    </div>
 <div class="container button-container d-flex justify-content-center">
-<a class="btn btn-secondary button-container justify-content-center mb-4" href="/">Home</a>
+<a class="btn btn-secondary button-container justify-content-center mb-4 shadow" href="/"><span><i class="fas fa-home"></i></span></a>
 
 </div>
 
 {{#each saved}}
 
-<div class="container border mb-2 p-2 bg-light" >
-    <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead">{{this.title}}</a>
+<div class="container border mb-2 p-2 bg-light shadow" >
+    <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead text-decoration-none link">{{this.title}}</a>
     <h5 class="text-muted">by: {{this.author}}</h5>
     <p>{{this.tags}}</p>
     <div class="input-group mb-3 container">
@@ -17,8 +21,8 @@ saved
         </div>
     </div>
     
-    <button class="btn btn-danger delete" id="{{this._id}}">Delete</button>
-    <a class="btn btn-primary view-comment" id="{{this._id}}">see comment</a>
+    <button class="btn btn-danger delete" ><span><i id="{{this._id}}" class="far fa-trash-alt"></i></span></button>
+    <a class="btn btn-primary text-light view-comment" ><span><i  id="{{this._id}}" class="far fa-comment-alt"></i></span></a>
     
 </div>
 {{/each}}

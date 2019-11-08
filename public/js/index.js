@@ -41,11 +41,15 @@ $('.comment').click(e => {
 $('.view-comment').click(e => {
  
     $.get(`/saved/${e.target.id}`, data => {
-        console.log(data.note.comment)
         $('#modal').modal({
             show: true
         });
-        $('#modal-text').text(data.note.comment)
+         if (data.note) {
+             $('#modal-text').text(data.note.comment)
+         } else {
+            $('#modal-text').text('No comments yet')
+             
+         }
     })
     
 });

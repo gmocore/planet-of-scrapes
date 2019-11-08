@@ -1,19 +1,23 @@
-<div class="container-fluid button-container d-flex justify-content-center bg-dark mb-2 shadow">
+<div class="container-fluid button-container d-flex justify-content-center bg-dark shadow mb-2 p-2">
 
-  <button id="scrape" class="btn btn-secondary m-2 shadow">Scrape</button>
-  <a class="btn btn-secondary m-2 shadow" href="/saved">Saved Articles</a>
-  <button id="clear" class="btn btn-secondary m-2 shadow">Clear All</button>
+    <button id="scrape" class="btn btn-secondary m-2 shadow">Scrape</button>
+    <a class="btn btn-secondary m-2 shadow" href="/saved">Saved Articles</a>
+    <button id="clear" class="btn btn-secondary m-2 shadow">Clear All</button>
 </div>
+
 
 
 {{#each article}}
 {{#unless this.saved}}
-<div class="container border mb-2 p-2 bg-light shadow">
-  <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank" class="lead text-decoration-none link">{{this.title}}</a>
-  <h5 class="text-muted">by: {{this.author}}</h5>
-  <p>{{this.tags}}</p>
-  <button class="btn btn-danger delete shadow"><span><i id="{{this._id}}" class="far fa-trash-alt"></i></span></button>
-  <button class="btn btn-success save-article shadow"><span><i id="{{this._id}}" class="far fa-heart"></i></span></button>
+<div class="container border mb-2 p-2 bg-light shadow article-container">
+    <a href="https://www.freecodecamp.org/{{this.link}}" target="_blank"
+        class="lead text-decoration-none link ">{{this.title}}</a>
+    <h5 class="text-dark">by: {{this.author}}</h5>
+    <p>{{this.tags}}</p>
+    <button class="btn btn-danger delete shadow"><span><i id="{{this._id}}"
+                class="far fa-trash-alt"></i></span></button>
+    <button class="btn btn-success save-article shadow"><span><i id="{{this._id}}"
+                class="far fa-heart"></i></span></button>
 
 </div>
 {{/unless}}

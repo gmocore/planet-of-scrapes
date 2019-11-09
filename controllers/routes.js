@@ -37,6 +37,9 @@ router.get("/scrape", (req, res) => {
     .then(response => {
       // parse data with cheerio
       const $ = cheerio.load(response.data);
+      
+      // boolean flag to track new articles
+      let areThereNewArticles = false;
 
       // store desired fields in object for each scraped article
       $(".post-card-title").each((i, element) => {
@@ -66,31 +69,38 @@ router.get("/scrape", (req, res) => {
           .trim();
 
         // create article in db
-        db.Article.create(result)
-          .then(article => {
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        // db.Article.create(result)
+        //   .then(article => {
+        //   })
+        //   .catch(err => {
+        //     console.log(err);
+        //   });
 
-        // db.Article.findOne({ title: result.title })
-        // .then(existingArticle => {
-        //   if(!existingArticle) {
-        //     db.Article.create(result)
-        //     .then(article => {
-        //       console.log(article)
-        //     })
-        //     .catch(err => {
-        //       console.log(err);
-        //     });
-        //   } else {
-        //     res.send('no new articles')
-        //   }
-        // })
-        // .catch(err => res.json(err))
+        db.Article.findOne({ title: result.title })
+        .then(existingArticle => {
+          if(!existingArticle) {
+            areThereNewArticles = true;
+
+            db.Article.create(result)
+            .then(article => {
+              // console.log(article)
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          } 
+        })
+        .catch(err =>  res.json(err))
       });
 
-      res.send("All scraped up");
+      // send if new articles are not found
+      if (!areThereNewArticles) {
+        return res.send('no new articles')
+
+      }
+
+      // 
+      return res.send("All scraped up");
     })
     // check for errors
     .catch(err => {
@@ -122,7 +132,6 @@ router.get("/saved/:id", (req, res) => {
 
 // route to add a comment to an article
 router.post("/saved/:id", (req, res) => {
-  console.log(req.body);
   db.Note.create(req.body)
     .then(dbNote => {
       console.log(dbNote);

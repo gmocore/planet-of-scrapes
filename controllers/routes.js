@@ -68,7 +68,6 @@ router.get("/scrape", (req, res) => {
         // create article in db
         db.Article.create(result)
           .then(article => {
-            console.log(article);
           })
           .catch(err => {
             console.log(err);

@@ -46,4 +46,4 @@ Fast, flexible & lean implementation of core jQuery designed specifically for th
 
 # Deployed App
 
-https://secret-ravine-34348.herokuapp.com/
+https://planet-scrape.herokuapp.com/

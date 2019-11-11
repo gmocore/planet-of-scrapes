@@ -68,14 +68,6 @@ router.get("/scrape", (req, res) => {
           .text()
           .trim();
 
-        // create article in db
-        // db.Article.create(result)
-        //   .then(article => {
-        //   })
-        //   .catch(err => {
-        //     console.log(err);
-        //   });
-
         db.Article.findOne({ title: result.title })
         .then(existingArticle => {
           if(!existingArticle) {
@@ -95,11 +87,10 @@ router.get("/scrape", (req, res) => {
 
       // send if new articles are not found
       if (!areThereNewArticles) {
-        return res.send('no new articles')
-
+        return res.send('no new articles');
       }
 
-      // 
+      // send message to frontend
       return res.send("All scraped up");
     })
     // check for errors

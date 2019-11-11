@@ -6,7 +6,6 @@ $("#scrape").click(e => {
     method: "GET"
   })
     .then(data => {
-      console.log(data);
       location.reload();
     })
     .catch(err => {
@@ -28,7 +27,6 @@ $(".comment").click(e => {
     }
   })
     .then(data => {
-      console.log(data);
       $(`#input-${e.target.id}`).val("");
     })
     .catch(err => {
@@ -39,7 +37,6 @@ $(".comment").click(e => {
 // view comment when button is clicked
 $(".view-comment").click(e => {
   $.get(`/saved/${e.target.id}`, data => {
-    console.log(data);
     if (data.notes) {
       // clear notes before displaying new ones
       $(".modal-body").empty();
@@ -74,7 +71,6 @@ $(".delete").click(e => {
     method: "DELETE"
   })
     .then(data => {
-      console.log(data);
       location.reload();
     })
     .catch(err => {
@@ -91,7 +87,6 @@ $(".save-article").click(e => {
     method: "POST"
   })
     .then(data => {
-      console.log(data);
       location.reload();
     })
     .catch(err => {
@@ -106,18 +101,17 @@ $("#clear").click(e => {
   });
 });
 
+// function to create event listener for dynamically created content.
 const deleteListener = () => {
   // delete article when button is clicked
   $(".delete-comment").click(e => {
     e.preventDefault();
-    console.log(e.target.id);
 
     $.ajax({
       url: `/comments/${e.target.id}`,
       method: "DELETE"
     })
       .then(data => {
-        console.log(data);
         location.reload();
       })
       .catch(err => {

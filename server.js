@@ -9,17 +9,17 @@ const PORT = process.env.PORT || 3000;
 // initialize app
 const app = express();
 
-// set mongoose middleware
+// mongoose middleware
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
-//set express middleware
+// express middleware
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static('public'));
 
-// set handlebars middleware
+// handlebars middleware
 app.engine('handlebars', hbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
